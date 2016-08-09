@@ -5,7 +5,7 @@
     <option value="stars">By Catégorie</option>
     <option value="city">By ville</option>
 </select>
-<div ng-repeat="hotel in accueil.hotels| filter:query | orderBy:order">
+<div ng-repeat="hotel in hotels| filter:query | orderBy:order">
     <h4>Nom : {{ hotel.libelle }}</h4>
     <span>Catégorie : {{ hotel.stars }}</span>
     <span>Ville : {{ hotel.city }}</span>
