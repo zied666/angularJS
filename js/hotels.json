@@ -1,0 +1,42 @@
+[
+  {
+    "libelle": "Club Med",
+    "stars": 5,
+    "city": "Hammamet "
+  },
+  {
+    "libelle": "Africa",
+    "stars": 2,
+    "city": "marsa "
+  },
+  {
+    "libelle": "Le prince",
+    "stars": 3,
+    "city": "Hammamet "
+  },
+  {
+    "libelle": "Movenmic",
+    "stars": 2,
+    "city": "Sousse "
+  },
+  {
+    "libelle": "Kiops",
+    "stars": 4,
+    "city": "Sousse "
+  },
+  {
+    "libelle": "Hambra",
+    "stars": 5,
+    "city": "marsa "
+  },
+  {
+    "libelle": "Magic life",
+    "stars": 3,
+    "city": "Hammamet "
+  },
+  {
+    "libelle": "Manar",
+    "stars": 4,
+    "city": "Sousse "
+  }
+]
