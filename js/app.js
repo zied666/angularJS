@@ -1,4 +1,4 @@
-var app = angular.module('MonApp', ['ngRoute']);
+var app = angular.module('MonApp', ['ngRoute','ngResource']);
 
 
 app.run(function ($rootScope, $templateCache) {
@@ -6,7 +6,8 @@ app.run(function ($rootScope, $templateCache) {
         $templateCache.removeAll();
     });
 });
-
+app.run(['$templateCache', function ( $templateCache ) {
+    $templateCache.removeAll(); }]);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {templateUrl: 'page/hotels.html', controller: 'HotelsController'})

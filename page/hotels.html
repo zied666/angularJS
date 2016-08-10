@@ -2,24 +2,21 @@
     <form ng-submit="addComment();">
         <span>Add Hotel </span> :
         <input type="number" placeholder="ID" ng-model="newHotel.id">
-        <input type="text" placeholder="Libéllé" ng-model="newHotel.libelle">
-        <input type="number" placeholder="Etoiles" ng-model="newHotel.stars">
-        <input type="text" placeholder="ville" ng-model="newHotel.city">
+        <input type="number" placeholder="userId" ng-model="newHotel.userId">
+        <input type="text" placeholder="title" ng-model="newHotel.title">
+        <input type="text" placeholder="body" ng-model="newHotel.body">
         <input type="submit" value="Add">
     </form>
     <hr>
     <span>Filter</span> :
-    <input type="text" ng-model="search.libelle" placeholder="filter by name">
-    <input type="text" ng-model="search.city" placeholder="filter by City">
+    <input type="text" ng-model="search.title" placeholder="filter by title">
+    <input type="text" ng-model="search.body" placeholder="filter by body">
     <select ng-model="order">
-        <option value="libelle">By Nom</option>
-        <option value="stars">By Catégorie</option>
-        <option value="city">By ville</option>
+        <option value="id">No Ordre</option>
+        <option value="title" selected>By Title</option>
+        <option value="body">By body</option>
     </select>
     <div ng-repeat="hotel in hotels| filter:search | orderBy:order">
-        <h4>{{ hotel.libelle }} {{ hotel.stars|showStars }}</h4>
-        <span>Ville : {{ hotel.city }}</span>
-        <span><a href="#/hotel/{{hotel.id}}">Détails</a></span>
-        <hr>
+        <ng-hotel hotel="hotel" showurl="true" ></ng-hotel>
     </div>
 </div>
