@@ -1,5 +1,6 @@
 <div ng-hide="loading">
     <form ng-submit="addComment();">
+        <span>Add Hotel </span> :
         <input type="number" placeholder="ID" ng-model="newHotel.id">
         <input type="text" placeholder="Libéllé" ng-model="newHotel.libelle">
         <input type="number" placeholder="Etoiles" ng-model="newHotel.stars">
@@ -7,15 +8,16 @@
         <input type="submit" value="Add">
     </form>
     <hr>
-    <input type="text" ng-model="query">
+    <span>Filter</span> :
+    <input type="text" ng-model="search.libelle" placeholder="filter by name">
+    <input type="text" ng-model="search.city" placeholder="filter by City">
     <select ng-model="order">
         <option value="libelle">By Nom</option>
         <option value="stars">By Catégorie</option>
         <option value="city">By ville</option>
     </select>
-    <div ng-repeat="hotel in hotels| filter:query | orderBy:order">
-        <h4></h4>
-        <span>Catégorie : {{ hotel.stars }}</span>
+    <div ng-repeat="hotel in hotels| filter:search | orderBy:order">
+        <h4>{{ hotel.libelle }} {{ hotel.stars|showStars }}</h4>
         <span>Ville : {{ hotel.city }}</span>
         <span><a href="#/hotel/{{hotel.id}}">Détails</a></span>
         <hr>
