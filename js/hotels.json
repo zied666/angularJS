@@ -10,41 +10,5 @@
     "libelle": "Africa",
     "stars": 2,
     "city": "marsa "
-  },
-  {
-    "id": 3,
-    "libelle": "Le prince",
-    "stars": 3,
-    "city": "Hammamet "
-  },
-  {
-    "id": 4,
-    "libelle": "Movenmic",
-    "stars": 2,
-    "city": "Sousse "
-  },
-  {
-    "id": 5,
-    "libelle": "Kiops",
-    "stars": 4,
-    "city": "Sousse "
-  },
-  {
-    "id": 6,
-    "libelle": "Hambra",
-    "stars": 5,
-    "city": "marsa "
-  },
-  {
-    "id": 7,
-    "libelle": "Magic life",
-    "stars": 3,
-    "city": "Hammamet "
-  },
-  {
-    "id": 8,
-    "libelle": "Manar",
-    "stars": 4,
-    "city": "Sousse "
   }
 ]

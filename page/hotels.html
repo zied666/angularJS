@@ -1,13 +1,23 @@
-<input type="text" ng-model="query">
-<select ng-model="order">
-    <option value="libelle">By Nom</option>
-    <option value="stars">By Catégorie</option>
-    <option value="city">By ville</option>
-</select>
-<div ng-repeat="hotel in hotels| filter:query | orderBy:order">
-    <h4></h4>
-    <span>Catégorie : {{ hotel.stars }}</span>
-    <span>Ville : {{ hotel.city }}</span>
-    <span><a href="#/hotel/0">Détails</a></span>
+<div ng-hide="loading">
+    <form ng-submit="addComment();">
+        <input type="number" placeholder="ID" ng-model="newHotel.id">
+        <input type="text" placeholder="Libéllé" ng-model="newHotel.libelle">
+        <input type="number" placeholder="Etoiles" ng-model="newHotel.stars">
+        <input type="text" placeholder="ville" ng-model="newHotel.city">
+        <input type="submit" value="Add">
+    </form>
     <hr>
+    <input type="text" ng-model="query">
+    <select ng-model="order">
+        <option value="libelle">By Nom</option>
+        <option value="stars">By Catégorie</option>
+        <option value="city">By ville</option>
+    </select>
+    <div ng-repeat="hotel in hotels| filter:query | orderBy:order">
+        <h4></h4>
+        <span>Catégorie : {{ hotel.stars }}</span>
+        <span>Ville : {{ hotel.city }}</span>
+        <span><a href="#/hotel/{{hotel.id}}">Détails</a></span>
+        <hr>
+    </div>
 </div>
