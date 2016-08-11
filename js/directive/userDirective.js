@@ -10,12 +10,6 @@ app.directive("ngUserName", function () {
             $scope.loading = true;
             $scope.user=UserFactory.get($scope.id);
             $scope.loading = false;
-            /*UserFactory.get($scope.id).then(function (user) {
-                $scope.loading = false;
-                $scope.user = user;
-            }, function (msg) {
-                alert(msg);
-            });*/
         }
 
     }

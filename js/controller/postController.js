@@ -21,10 +21,10 @@ app.controller('PostsController', function ($scope,$rootScope, $http, PostFactor
     }
 });
 
-app.controller('PostController', function ($scope,$rootScope, $http, PostFactory, $routeParams) {
-    $rootScope.loading = true;
+app.controller('PostController', function ($scope, $http, PostFactory, $routeParams) {
+    $scope.loading = true;
     PostFactory.get($routeParams.id).then(function (post) {
-        $rootScope.loading = false;
+        $scope.loading = false;
         $scope.post = post;
     }, function (msg) {
         alert(msg);

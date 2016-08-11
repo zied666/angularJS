@@ -1,0 +1,9 @@
+<span ng-show="loading">loading...</span>
+<span ng-hide="loading">
+    <a href="javascript:void(0)" ng-click="showComments = !showComments">comments ({{count}})</a>
+</span>
+<div ng-show="showComments" ng-repeat="comment in comments">
+    <p><strong>{{comment.name}}</strong></p>
+    <p>{{comment.body}}</p>
+    <hr>
+</div>
