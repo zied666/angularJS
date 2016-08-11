@@ -2,7 +2,7 @@ app.directive("ngPost", function () {
 
     return {
         scope: {
-            post: '=',
+            post: '='
         },
         restrict: "E",
         templateUrl: 'page/directives/post_element.html'
