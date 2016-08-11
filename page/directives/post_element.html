@@ -1,0 +1,5 @@
+<p><strong>{{ post.title }} {{ post.id|showStars }}</strong></p>
+<ng-user-name id="post.userId"></ng-user-name>
+<div style="width: 500px">{{ post.body }}</div>
+<span ng-show="{{showurl}}"><a href="#/post/{{post.id}}">Détails</a></span>
+<hr>

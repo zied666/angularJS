@@ -10,7 +10,7 @@ app.run(['$templateCache', function ( $templateCache ) {
     $templateCache.removeAll(); }]);
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/', {templateUrl: 'page/hotels.html', controller: 'HotelsController'})
-        .when('/hotel/:id', {templateUrl: 'page/hotel.html', controller: 'HotelController'})
+        .when('/', {templateUrl: 'page/posts.html', controller: 'PostsController'})
+        .when('/post/:id', {templateUrl: 'page/post.html', controller: 'PostController'})
         .otherwise({redirectTo: '/'});
 });
