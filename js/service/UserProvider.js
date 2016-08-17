@@ -3,10 +3,9 @@ app.service('UserFactory', function ($http, $q, $timeout, $resource) {
     var factory = {
         users: false,
         all: function () {
-            var users =[];
+            var users = [];
             var deferred = $q.defer();
-            if(factory.users==false)
-            {
+            if (factory.users == false) {
                 Post = $resource('https://jsonplaceholder.typicode.com/users');
                 factory.users = Post.query(function () {
                     deferred.resolve(factory.users);
@@ -17,17 +16,16 @@ app.service('UserFactory', function ($http, $q, $timeout, $resource) {
             return deferred.promise;
         },
         limit: function (i) {
-            var users =[];
+            var users = [];
             var deferred = $q.defer();
-            if(factory.users==false)
-            {
+            if (factory.users == false) {
                 Post = $resource('https://jsonplaceholder.typicode.com/users');
                 factory.users = Post.query(function () {
-                    deferred.resolve(factory.users.slice(0,i));
+                    deferred.resolve(factory.users.slice(0, i));
                 });
             }
             else
-                deferred.resolve(factory.users.slice(0,i));
+                deferred.resolve(factory.users.slice(0, i));
             return deferred.promise;
         },
         getPromise: function (id) {
@@ -60,6 +58,20 @@ app.service('UserFactory', function ($http, $q, $timeout, $resource) {
             }
             else
                 return {};
+        },
+        getToDos: function (id) {
+            var todos=[];
+            var deferred = $q.defer();
+            Post = $resource('https://jsonplaceholder.typicode.com/users/:id/todos', {id: id}, {
+                'query': {
+                    method: 'GET',
+                    isArray: true
+                }
+            });
+            todos = Post.query(function () {
+                deferred.resolve(todos);
+            });
+            return deferred.promise;
         }
     };
     return factory;
