@@ -1,9 +1,19 @@
-<span ng-show="loading">loading...</span>
-<span ng-hide="loading">
-    <a href="javascript:void(0)" ng-click="showComments = !showComments">comments ({{count}})</a>
-</span>
-<div ng-show="showComments" ng-repeat="comment in comments">
-    <p><strong>{{comment.name}}</strong></p>
-    <p>{{comment.body}}</p>
-    <hr>
+<div class="row">
+    <div class="col-md-2">
+        <span ng-show="loading">loading...</span>
+        <span ng-hide="loading">
+            <a href="javascript:void(0)" ng-click="showAllComments()">Comments ({{count}})</a>
+        </span>
+    </div>
+    <div class="col-md-10" ng-if="!loadingComments">
+        <div ng-show="showComments" ng-repeat="comment in comments">
+            <blockquote>
+                <h6><strong>{{comment.name}}</strong></h6>
+                <small>{{comment.body}}</small>
+            </blockquote>
+        </div>
+    </div>
+    <div class="col-md-10" ng-if="loadingComments">
+        Loading ...
+    </div>
 </div>

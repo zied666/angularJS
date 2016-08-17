@@ -21,12 +21,35 @@ app.directive("ngCommentLink", function () {
         controller:function ($scope,CommentFactory) {
             $scope.showComments = false;
             $scope.loading = true;
-            CommentFactory.getByPostId($scope.id).then(function (comments) {
-                console.log(comments);
+            $scope.comments=[];
+            CommentFactory.getCountByPostId($scope.id).then(function (count) {
                 $scope.loading = false;
-                $scope.count = comments.length;
-                $scope.comments = comments;
+                $scope.count = count;
             });
+            $scope.showAllComments=function () {
+                $scope.loadingComments = true;
+                if($scope.showComments==false)
+                {
+                    if($scope.comments.length==0)
+                    {
+                        CommentFactory.getByPostId($scope.id).then(function (data) {
+                            $scope.comments = data;
+                            $scope.showComments = true;
+                            $scope.loadingComments = false;
+                        });
+                    }
+                    else
+                    {
+                        $scope.showComments = true;
+                        $scope.loadingComments = false;
+                    }
+                }
+                else
+                {
+                    $scope.showComments = false;
+                    $scope.loadingComments = false;
+                }
+            }
         }
     }
 
