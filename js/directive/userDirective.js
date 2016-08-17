@@ -2,17 +2,15 @@ app.directive("ngUserName", function () {
 
     return {
         scope: {
-            id: '='
+            iduser: '='
         },
         restrict: "E",
         templateUrl: 'page/directives/user_name_element.html',
-        controller:function ($scope,UserFactory) {
-            console.log($scope.id);
+        controller: function ($scope, $rootScope, UserFactory) {
             $scope.loading = true;
-            $scope.user=UserFactory.get($scope.id);
+            $scope.user = UserFactory.get($scope.iduser);
             $scope.loading = false;
         }
-
     }
 
 });

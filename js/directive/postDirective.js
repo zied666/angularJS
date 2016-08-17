@@ -22,6 +22,7 @@ app.directive("ngCommentLink", function () {
             $scope.showComments = false;
             $scope.loading = true;
             CommentFactory.getByPostId($scope.id).then(function (comments) {
+                console.log(comments);
                 $scope.loading = false;
                 $scope.count = comments.length;
                 $scope.comments = comments;

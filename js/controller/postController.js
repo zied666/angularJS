@@ -1,4 +1,4 @@
-app.controller('PostsController', function ($scope,$rootScope, $http, PostFactory) {
+app.controller('PostsController', function ($scope,$rootScope, PostFactory) {
     $rootScope.loading = true;
     $scope.newPost = {};
     PostFactory.all().then(function (posts) {
@@ -21,10 +21,10 @@ app.controller('PostsController', function ($scope,$rootScope, $http, PostFactor
     }
 });
 
-app.controller('PostController', function ($scope, $http, PostFactory, $routeParams) {
-    $scope.loading = true;
+app.controller('PostController', function ($scope,$rootScope, PostFactory, $routeParams) {
+    $rootScope.loading = true;
     PostFactory.get($routeParams.id).then(function (post) {
-        $scope.loading = false;
+        $rootScope.loading = false;
         $scope.post = post;
     }, function (msg) {
         alert(msg);
