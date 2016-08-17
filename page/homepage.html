@@ -1,3 +1,61 @@
 <div ng-hide="loading" class="container">
     <h1>HomePage</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Last 5 posts</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="loadingUsers">
+                    <td colspan="5" style="text-align: center"><img src="lib/img/loader2.gif" alt=""></td>
+                </tr>
+                <tr ng-hide="loadingUsers" ng-repeat="user in users">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <a href="#/user/{{user.id}}"><span class="glyphicon glyphicon glyphicon-eye-open"
+                                                           aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <div class="col-md-8">
+            <h3>Last 5 Users</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Text</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="loadingPosts">
+                    <td colspan="5" style="text-align: center"><img src="lib/img/loader2.gif" alt=""></td>
+                </tr>
+                <tr ng-hide="loadingPosts" ng-repeat="post in posts">
+                    <td>{{post.title}}</td>
+                    <td>{{post.body}}</td>
+                    <td>
+                        <a href="#/post/{{post.id}}"><span class="glyphicon glyphicon glyphicon-eye-open"
+                                                           aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

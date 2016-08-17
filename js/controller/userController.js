@@ -7,12 +7,12 @@ app.controller('UserController', function ($scope, $rootScope, $http, UserFactor
 });
 
 
-app.controller('UsersController', function ($scope, $rootScope, $http, UserFactory) {
-    $rootScope.loading = true;
+app.controller('UsersController', function ($scope,$rootScope, $http, UserFactory) {
+    $rootScope.loading=false;
+    $scope.loadingTable = true;
     $scope.users=[];
     UserFactory.all().then(function (data) {
         $scope.users=data;
-        console.log($scope.users);
-        $rootScope.loading = false;
+        $scope.loadingTable = false;
     });
 });

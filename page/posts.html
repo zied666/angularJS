@@ -16,7 +16,7 @@
         <option value="title" selected>By Title</option>
         <option value="body">By body</option>
     </select>
-
+    <hr>
     <div class="row">
         <div class="col-md-12" ng-repeat="post in posts| limitTo:20:1 | filter:search | orderBy:order">
             <ng-post post="post"></ng-post>

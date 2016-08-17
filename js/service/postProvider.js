@@ -15,6 +15,18 @@ app.service('PostFactory', function ($http, $q, $timeout, $resource) {
             }
             return deferred.promise;
         },
+        limit: function (i) {
+            var deferred = $q.defer();
+            if (factory.posts != false) {
+                deferred.resolve(factory.posts.slice(0,i));
+            }
+            else {
+                factory.posts = Post.query(function () {
+                    deferred.resolve(factory.posts.slice(0,i));
+                });
+            }
+            return deferred.promise;
+        },
         get: function (id) {
 
             var deferred = $q.defer();
