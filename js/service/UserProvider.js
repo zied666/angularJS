@@ -1,24 +1,42 @@
 app.service('UserFactory', function ($http, $q, $timeout, $resource) {
 
-    var Post = $resource('https://jsonplaceholder.typicode.com/users');
     var factory = {
-        users: false,
+        //users: false,
         all: function () {
+            var users =[];
             var deferred = $q.defer();
-            if (factory.users != false) {
-                deferred.resolve(factory.users);
-            }
-            else {
-                factory.users = Post.query(function () {
-                    deferred.resolve(factory.users);
+            Post = $resource('https://jsonplaceholder.typicode.com/users');
+            users = Post.query(function () {
+                deferred.resolve(users);
+            });
+            return deferred.promise;
+        },
+        getPromise: function (id) {
+            var deferred = $q.defer();
+            user = {};
+            if (id != undefined) {
+                Post = $resource('https://jsonplaceholder.typicode.com/users/:id', {id: id}, {
+                    'query': {
+                        method: 'GET',
+                        isArray: false
+                    }
+                });
+                user = Post.query(function () {
+                    deferred.resolve(user);
                 });
             }
+            else
+                deferred.resolve(user);
             return deferred.promise;
         },
         get: function (id) {
-            if(id!=undefined)
-            {
-                Post=$resource('https://jsonplaceholder.typicode.com/users/:id', {id:id}, {'query': {method: 'GET', isArray: false}});
+            if (id != undefined) {
+                Post = $resource('https://jsonplaceholder.typicode.com/users/:id', {id: id}, {
+                    'query': {
+                        method: 'GET',
+                        isArray: false
+                    }
+                });
                 return Post.query();
             }
             else

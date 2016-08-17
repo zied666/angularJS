@@ -1,0 +1,26 @@
+<div ng-hide="loading" ng-if="users.length > 0" class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.name}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+                <td>
+                    <a href="#/user/{{user.id}}"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
