@@ -2,14 +2,16 @@
     <div class="row">
         <div class="col-md-12">
             <h1>{{user.name}}</h1>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" ng-class="{'active':tab.profile}">
-                        <a ng-click="activeProfile()" aria-controls="home" role="tab" data-toggle="tab" style="cursor: pointer">Profile</a>
-                    </li>
-                    <li role="presentation" ng-class="{'active':tab.todos}">
-                        <a ng-click="activeToDos()" aria-controls="profile" role="tab" data-toggle="tab" style="cursor: pointer">Todos List</a>
-                    </li>
-                </ul>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" ng-class="{'active':tab.profile}">
+                    <a ng-click="activeProfile()" aria-controls="home" role="tab" data-toggle="tab"
+                       style="cursor: pointer">Profile</a>
+                </li>
+                <li role="presentation" ng-class="{'active':tab.todos}">
+                    <a ng-click="activeToDos()" aria-controls="profile" role="tab" data-toggle="tab"
+                       style="cursor: pointer">Todos List</a>
+                </li>
+            </ul>
         </div>
         <div class="col-md-12" ng-show="tab.profile">
             <dl class="dl-horizontal" style="margin-top: 20px;">
@@ -20,7 +22,9 @@
                 <dd>{{user.username}}</dd>
 
                 <dt>Address</dt>
-                <dd>{{user.address.city|uppercase}} {{user.address.street}} {{user.address.suite}} {{user.address.zipcode}}</dd>
+                <dd>{{user.address.city|uppercase}} {{user.address.street}} {{user.address.suite}}
+                    {{user.address.zipcode}}
+                </dd>
 
                 <dt>Email</dt>
                 <dd>{{user.email}}</dd>
@@ -39,8 +43,8 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Task</th>
                     <th>Completed</th>
+                    <th>Task</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,11 +52,12 @@
                     <td colspan="5" style="text-align: center"><img src="lib/img/loader2.gif" alt=""></td>
                 </tr>
                 <tr ng-hide="loadingToDo" ng-repeat="todo in todos">
-                    <td>{{todo.title}}</td>
                     <td>
                         <span ng-if="todo.completed" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         <span ng-if="!todo.completed" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </td>
+                    <td ng-if="todo.completed"> <del> {{todo.title}} </del></td>
+                    <td ng-if="!todo.completed">{{todo.title}}</td>
                 </tr>
                 </tbody>
             </table>

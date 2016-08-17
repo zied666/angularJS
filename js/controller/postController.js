@@ -1,6 +1,7 @@
 app.controller('PostsController', function ($scope,$rootScope, PostFactory) {
     $rootScope.loading = true;
     $scope.newPost = {};
+    $scope.order = "id";
     PostFactory.all().then(function (posts) {
         $rootScope.loading = false;
         $scope.posts = posts;

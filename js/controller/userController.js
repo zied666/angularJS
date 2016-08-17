@@ -14,27 +14,29 @@ app.controller('UserController', function ($scope, $rootScope, $http, UserFactor
     $scope.tab.profile=true;
     $scope.tab.todos=false;
     $rootScope.loading = true;
+    $scope.loadingToDo=true;
+    $scope.todos=[];
     UserFactory.getPromise($routeParams.id).then(function (user) {
         $scope.user=user;
         $rootScope.loading = false;
     });
 
-    $scope.loadingToDo=true;
-    $scope.todos=[];
-    UserFactory.getToDos($routeParams.id).then(function (data) {
-        $scope.todos=data;
-        $scope.loadingToDo=false;
-    });
-
     $scope.activeProfile=function () {
         $scope.tab.profile=true;
         $scope.tab.todos=false;
-    }
+    };
 
     $scope.activeToDos=function () {
+        if($scope.todos.length==0)
+        {
+            UserFactory.getToDos($routeParams.id).then(function (data) {
+                $scope.todos=data;
+                $scope.loadingToDo=false;
+            });
+        }
         $scope.tab.profile=false;
         $scope.tab.todos=true;
-    }
+    };
 
 
 });
