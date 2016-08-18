@@ -59,8 +59,18 @@ app.service('UserFactory', function ($http, $q, $timeout, $resource) {
             else
                 return {};
         },
+        login: function (email, password) {
+            var deferred = $q.defer();
+            $timeout(function () {
+                if (email == "admin@gmail.com" && password == "admin")
+                    deferred.resolve({name: "Zied Kharraz", email: "admin@gmail.com", role: "Administrateur"});
+                else
+                    deferred.resolve(false);
+            }, 2000);
+            return deferred.promise;
+        },
         getToDos: function (id) {
-            var todos=[];
+            var todos = [];
             var deferred = $q.defer();
             Post = $resource('https://jsonplaceholder.typicode.com/users/:id/todos', {id: id}, {
                 'query': {

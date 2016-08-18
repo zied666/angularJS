@@ -1,7 +1,9 @@
-<h4><a href="#/post/{{post.id}}">{{ post.title|uppercase }} </a> {{ post.id|showStars }}</h4>
+<h4><a href="#/post/{{post.id}}">{{ post.title|uppercase }} </a></h4>
 <blockquote>
     <p style="font-size: 13px;">{{ post.body }}.</p>
-    <footer><ng-user-name iduser="post.userId" ng-if="post.userId"></ng-user-name></footer>
+    <footer>
+        <ng-user-name iduser="post.userId" ng-if="post.userId"></ng-user-name>
+    </footer>
 </blockquote>
 <ng-comment-link id="post.id" ng-if="post.id">></ng-comment-link>
 <hr>

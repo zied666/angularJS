@@ -35,8 +35,8 @@
             </button>
             <a class="navbar-brand" href="#/">Angular JS</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="LoginController as loginCtrl">
+            <ul class="nav navbar-nav ">
                 <li>
                     <a href="#/">Home</a>
                 </li>
@@ -45,6 +45,17 @@
                 </li>
                 <li>
                     <a href="#/users">Users</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav" style="float: right;">
+                <li ng-if="!currentUser">
+                    <a href="#/login">Sign in</a>
+                </li>
+                <li ng-if="currentUser">
+                    <a>Hi {{ currentUser.name }}</a>
+                </li>
+                <li ng-if="currentUser">
+                    <a href="javascript:void(0)" ng-click="logout()" >Sign out</a>
                 </li>
             </ul>
         </div>
@@ -71,6 +82,7 @@
 <script src="js/filter.js"></script>
 <script src="js/directive/userDirective.js"></script>
 <script src="js/directive/postDirective.js"></script>
+<script src="js/controller/loginController.js"></script>
 <script src="js/controller/postController.js"></script>
 <script src="js/controller/homePageController.js"></script>
 <script src="js/controller/userController.js"></script>
