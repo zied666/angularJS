@@ -1,4 +1,4 @@
-app.controller('LoginController', function ($scope, $rootScope, UserFactory) {
+app.controller('LoginController', function ($scope, $rootScope, UserFactory,$window,$timeout) {
 
     $scope.success = false;
     $scope.error = false;
@@ -13,6 +13,9 @@ app.controller('LoginController', function ($scope, $rootScope, UserFactory) {
                 $rootScope.currentUser=response;
                 $scope.success = true;
                 $scope.error = false;
+                $timeout(function () {
+                    $window.location.href = '#/';
+                }, 5000);
             }
             else
             {
@@ -25,6 +28,8 @@ app.controller('LoginController', function ($scope, $rootScope, UserFactory) {
 
     $scope.logout = function () {
         $rootScope.currentUser=false;
+        $scope.success = false;
+        $scope.error = false;
     }
 
 });
