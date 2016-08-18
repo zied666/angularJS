@@ -12,7 +12,7 @@ app.controller('HomePageController', function ($scope,$rootScope, PostFactory,Us
         $scope.loadingUsers = false;
     });
 
-    PostFactory.limit(5).then(function (data) {
+    PostFactory.all(0,5).then(function (data) {
         $scope.posts=data;
         $scope.loadingPosts = false;
     });

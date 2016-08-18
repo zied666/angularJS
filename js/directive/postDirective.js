@@ -20,10 +20,8 @@ app.directive("ngCommentLink", function () {
         templateUrl: 'page/directives/comment_link.html',
         controller:function ($scope,$rootScope,CommentFactory) {
             $scope.showComments = false;
-            //$scope.loading = true;
             $scope.comments=[];
             CommentFactory.getCountByPostId($scope.id).then(function (count) {
-                //$scope.loading = false;
                 $scope.count = count;
             });
             $scope.showAllComments=function () {
