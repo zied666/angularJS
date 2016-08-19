@@ -1,4 +1,4 @@
-var app = angular.module('MonApp', ['ngRoute', 'ngResource']);
+var app = angular.module('MonApp', ['ngRoute', 'ngResource','ngCookies']);
 app.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$viewContentLoaded', function () {
         $templateCache.removeAll();
@@ -7,9 +7,9 @@ app.run(function ($rootScope, $templateCache) {
 app.run(['$templateCache', function ($templateCache) {
     $templateCache.removeAll();
 }]);
-app.run(function ($rootScope) {
+/*app.run(function ($rootScope) {
     $rootScope.currentUser=false;
-});
+});*/
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {templateUrl: 'page/homepage.html', controller: 'HomePageController'})

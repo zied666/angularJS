@@ -49,7 +49,6 @@ app.service('PostFactory', function ($http, $q, $timeout, $resource) {
             post.userId = 1;
             post.title = "zied";
             post.body = "zied";
-            console.log(post.$save());
             deferred.resolve(post);
             return deferred.promise;
         }

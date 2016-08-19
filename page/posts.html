@@ -36,9 +36,9 @@
             <button ng-if="!morePostLoading" type="button" ng-click="loadMorePost()" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
                 Load more posts
             </button>
-            <div ng-if="morePostLoading" style="text-align: center;margin-bottom: 100px;">
-                <img src="lib/img/loader2.gif" style="width: 200px;">
-            </div>
+            <button ng-if="morePostLoading" type="button" disabled class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
+                Loading ...
+            </button>
         </div>
     </div>
 </div>

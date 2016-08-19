@@ -8,7 +8,6 @@ app.controller('HomePageController', function ($scope,$rootScope, PostFactory,Us
 
     UserFactory.limit(5).then(function (data) {
         $scope.users=data;
-        console.log(data);
         $scope.loadingUsers = false;
     });
 
