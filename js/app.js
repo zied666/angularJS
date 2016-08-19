@@ -13,6 +13,7 @@ app.run(['$templateCache', function ($templateCache) {
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {templateUrl: 'page/homepage.html', controller: 'HomePageController'})
+        .when('/profile', {templateUrl: 'page/profile.html', controller: 'ProfileController'})
         .when('/login', {templateUrl: 'page/login.html', controller: 'LoginController'})
         .when('/posts', {templateUrl: 'page/posts.html', controller: 'PostsController'})
         .when('/post/:id', {templateUrl: 'page/post.html', controller: 'PostController'})

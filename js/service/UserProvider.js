@@ -1,6 +1,7 @@
 app.service('UserFactory', function ($http, $q, $timeout, $resource) {
 
     var factory = {
+        currentUser: false,
         users: false,
         all: function () {
             var users = [];
@@ -63,7 +64,12 @@ app.service('UserFactory', function ($http, $q, $timeout, $resource) {
             var deferred = $q.defer();
             $timeout(function () {
                 if (email == "admin@gmail.com" && password == "admin")
-                    deferred.resolve({name: "Zied Kharraz", email: "admin@gmail.com", role: "Administrateur"});
+                    deferred.resolve({
+                        name: "Zied Kharraz",
+                        email: "admin@gmail.com",
+                        address: "Tunis centre ville",
+                        phone: "+21653980209"
+                    });
                 else
                     deferred.resolve(false);
             }, 2000);
