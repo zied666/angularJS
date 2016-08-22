@@ -100,7 +100,7 @@
                         <div class="col-md-12" ng-show="loadingPhotos" style="text-align: center">
                             <img src="lib/img/loader2.gif"  style="width: 200px;margin-top: 130px;">
                         </div>
-                        <div class="col-md-4" ng-repeat="photo in photos" ng-hide="loadingPhotos">
+                        <div class="col-md-4 animated pulse" ng-repeat="photo in photos" ng-hide="loadingPhotos">
                             <a href="{{photo.url}}" target="_blank">
                                 <img src="{{photo.thumbnailUrl}}" class="img-thumbnail">
                             </a>
