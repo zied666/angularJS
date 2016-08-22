@@ -1,9 +1,9 @@
-app.controller('LoginController', function ($scope, $rootScope, $cookieStore, UserFactory, $window, $timeout) {
+app.controller('LoginController', function ($scope, $rootScope, $cookieStore, UserFactory, $window,$timeout, $route) {
 
-    if (UserFactory.currentUser != false)
+    if ($rootScope.currentUser != false)
         $window.location.href = '#/profile';
 
-    console.log(UserFactory.currentUser);
+    console.log($rootScope.currentUser);
     $scope.success = false;
     $scope.error = false;
 
@@ -12,12 +12,12 @@ app.controller('LoginController', function ($scope, $rootScope, $cookieStore, Us
         UserFactory.login($scope.email, $scope.password).then(function (response) {
             if (response != false) {
                 $cookieStore.put('currentUser', response);
-                UserFactory.currentUser = response;
+                $rootScope.currentUser = response;
                 $scope.success = true;
                 $scope.error = false;
-                /*$timeout(function () {
-                    $window.location.href = '#/';
-                }, 5000);*/
+                $timeout(function () {
+                    $route.reload()
+                }, 2000);
             }
             else {
                 $scope.success = false;
@@ -28,23 +28,23 @@ app.controller('LoginController', function ($scope, $rootScope, $cookieStore, Us
     };
 
 });
-app.controller('LoginNavController', function ($scope, $rootScope, $cookieStore, $window,UserFactory) {
+app.controller('LoginNavController', function ($scope, $rootScope, $cookieStore, $window, UserFactory) {
 
     if ($cookieStore.get('currentUser') == undefined)
         $cookieStore.put('currentUser', false);
-    UserFactory.currentUser = $cookieStore.get('currentUser');
-    $scope.currentUser=UserFactory.currentUser;
+    $rootScope.currentUser = $cookieStore.get('currentUser');
+    //$scope.currentUser = $rootScope.currentUser;
     $scope.logout = function () {
         $cookieStore.put('currentUser', false);
-        UserFactory.currentUser = false;
+        $rootScope.currentUser = false;
         $window.location.href = '#/';
     }
 
 });
 
-app.controller('ProfileController', function ($scope, $rootScope, $cookieStore, $window, $timeout,UserFactory) {
+app.controller('ProfileController', function ($scope, $rootScope, $cookieStore, $window, $timeout, UserFactory) {
 
-    if (UserFactory.currentUser == false)
+    if ($rootScope.currentUser == false)
         $window.location.href = '#/login';
 
     $scope.success = false;
@@ -55,7 +55,7 @@ app.controller('ProfileController', function ($scope, $rootScope, $cookieStore, 
         $scope.loadingForm = true;
         $timeout(function () {
             $cookieStore.put('currentUser', $scope.user);
-            UserFactory.currentUser = $scope.user;
+            $rootScope.currentUser = $cookieStore.get('currentUser');
             $scope.loadingForm = false;
             $scope.success = true;
         }, 1000);
