@@ -88,6 +88,34 @@ app.service('UserFactory', function ($http, $q, $timeout, $resource) {
                 deferred.resolve(todos);
             });
             return deferred.promise;
+        },
+        getAlbums: function (id) {
+            var albums = [];
+            var deferred = $q.defer();
+            Post = $resource('https://jsonplaceholder.typicode.com/users/:id/albums', {id: id}, {
+                'query': {
+                    method: 'GET',
+                    isArray: true
+                }
+            });
+            albums = Post.query(function () {
+                deferred.resolve(albums);
+            });
+            return deferred.promise;
+        },
+        getPhotos: function (id) {
+            var photos = [];
+            var deferred = $q.defer();
+            Post = $resource('https://jsonplaceholder.typicode.com/albums/:id/photos', {id: id}, {
+                'query': {
+                    method: 'GET',
+                    isArray: true
+                }
+            });
+            photos = Post.query(function () {
+                deferred.resolve(photos);
+            });
+            return deferred.promise;
         }
     };
     return factory;
