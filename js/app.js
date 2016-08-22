@@ -1,4 +1,4 @@
-var app = angular.module('MonApp', ['ngRoute', 'ngResource','ngCookies']);
+var app = angular.module('MonApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate']);
 app.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$viewContentLoaded', function () {
         $templateCache.removeAll();

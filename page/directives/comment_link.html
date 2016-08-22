@@ -5,8 +5,8 @@
             <a href="javascript:void(0)" ng-click="showAllComments()">Comments ({{count}})</a>
         </span>
     </div>
-    <div class="col-md-10" ng-if="!loadingComments">
-        <div ng-show="showComments" ng-repeat="comment in comments">
+    <div class="col-md-10 comments animated" ng-if="!loadingComments && showComments">
+        <div ng-repeat="comment in comments">
             <blockquote>
                 <h6><strong>{{comment.name}}</strong></h6>
                 <small>{{comment.body}}</small>

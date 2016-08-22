@@ -1,0 +1,24 @@
+.animated.ng-enter,.animated.ng-leave {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+}
+
+.posts.ng-enter {
+    -webkit-animation-name: bounceIn;
+}
+
+.posts.ng-leave {
+    -webkit-animation-name: bounceOut;
+}
+
+.posts.ng-move {
+    -webkit-animation-name: pulse;
+}
+
+.comments.ng-enter {
+    -webkit-animation-name: bounceInLeft;
+}
+
+.comments.ng-leave {
+    -webkit-animation-name: bounceOutLeft;
+}
