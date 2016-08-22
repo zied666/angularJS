@@ -17,7 +17,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-12" ng-show="tab.profile">
+        <div class="col-md-12 animated tab1" ng-if="tab.profile">
             <dl class="dl-horizontal" style="margin-top: 20px;">
                 <dt>Name</dt>
                 <dd>{{user.name}}</dd>
@@ -43,7 +43,7 @@
                 <dd>{{user.company.name}}</dd>
             </dl>
         </div>
-        <div class="col-md-12" ng-show="tab.todos">
+        <div class="col-md-12 animated tab2" ng-if="tab.todos">
             <table class="table">
                 <thead>
                 <tr>
@@ -68,7 +68,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12" ng-show="tab.albums">
+        <div class="col-md-12 animated tab3" ng-if="tab.albums">
             <div class="row">
                 <div class="col-md-6">
                     <table class="table">
@@ -100,7 +100,7 @@
                         <div class="col-md-12" ng-show="loadingPhotos" style="text-align: center">
                             <img src="lib/img/loader2.gif"  style="width: 200px;margin-top: 130px;">
                         </div>
-                        <div class="col-md-4 animated pulse" ng-repeat="photo in photos" ng-hide="loadingPhotos">
+                        <div class="col-md-4" ng-repeat="photo in photos" ng-hide="loadingPhotos">
                             <a href="{{photo.url}}" target="_blank">
                                 <img src="{{photo.thumbnailUrl}}" class="img-thumbnail">
                             </a>
