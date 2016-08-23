@@ -1,4 +1,4 @@
-var app = angular.module('MonApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate','ngMessages']);
+var app = angular.module('MonApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate','ngMessages','ngSanitize']);
 app.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$viewContentLoaded', function () {
         $templateCache.removeAll();
@@ -7,6 +7,13 @@ app.run(function ($rootScope, $templateCache) {
 app.run(['$templateCache', function ($templateCache) {
     $templateCache.removeAll();
 }]);
+
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}
+]);
+
 /*app.run(function ($rootScope) {
     $rootScope.currentUser=false;
 });*/
@@ -19,5 +26,6 @@ app.config(function ($routeProvider) {
         .when('/post/:id', {templateUrl: 'page/post.html', controller: 'PostController'})
         .when('/user/:id', {templateUrl: 'page/user.html', controller: 'UserController'})
         .when('/users', {templateUrl: 'page/users.html', controller: 'UsersController'})
+        .when('/hotels', {templateUrl: 'page/hotels.html', controller: 'HotelsController'})
         .otherwise({redirectTo: '/'});
 });
