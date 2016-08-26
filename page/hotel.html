@@ -1,0 +1,73 @@
+<div ng-if="!loading" class="container">
+    <div class="page-header">
+        <h1>{{ hotel.libelle }}
+            <small>{{ hotel.ville.region.libelle }}</small>
+        </h1>
+    </div>
+    <div style="margin-bottom: 40px">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="javascript:void(0)" ng-click="tab=1" aria-controls="home" role="tab" data-toggle="tab">Description</a>
+            </li>
+            <li role="presentation">
+                <a href="javascript:void(0)" ng-click="tab=2" aria-controls="profile" role="tab" data-toggle="tab">Data</a>
+            </li>
+            <li role="presentation">
+                <a href="javascript:void(0)" ng-click="tab=3" aria-controls="messages" role="tab" data-toggle="tab">Gmaps</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row" ng-if="tab==1">
+        <div class="col-md-12">
+            <div ng-bind-html="hotel.description_longue"></div>
+        </div>
+    </div>
+    <div class="row" ng-if="tab==2">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>Name :</dt>
+                <dd>{{ hotel.libelle }}</dd>
+                <dt>Chaine :</dt>
+                <dd>{{ hotel.chaine.libelle }}</dd>
+                <dt>Stars :</dt>
+                <dd>{{ hotel.categorie.libelle }}</dd>
+                <dt>Country :</dt>
+                <dd>{{ hotel.ville.pays.libelle }}</dd>
+                <dt>City :</dt>
+                <dd>{{ hotel.ville.libelle }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+
+            <dl class="dl-horizontal">
+                <dt>Rooms :</dt>
+                <dd>
+                    <p ng-repeat="chambre in hotel.chambres">- {{ chambre.libelle }}</p>
+                </dd>
+                <dt>Arrangement :</dt>
+                <dd>
+                    <p ng-repeat="arrangement in hotel.arrangements">- {{ arrangement.libelle }}</p>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>Address :</dt>
+                <dd>{{ hotel.adresse }}</dd>
+                <dt>Country :</dt>
+                <dd>{{ hotel.ville.pays.libelle }}</dd>
+                <dt>City :</dt>
+                <dd>{{ hotel.ville.libelle }}</dd>
+                <dt>Email :</dt>
+                <dd>{{ hotel.email1 }}</dd>
+                <dt>Tel :</dt>
+                <dd>{{ hotel.tel1}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="row" ng-if="tab==3">
+        <div class="col-md-12">
+            <ng-maps longitude="hotel.longitude" latitude="hotel.latitude"></ng-maps>
+        </div>
+    </div>
+</div>

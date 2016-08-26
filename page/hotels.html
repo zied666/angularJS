@@ -1,12 +1,10 @@
-<div ng-hide="loading" class="container">
+<div ng-if="!loading" class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" ng-model="search.libelle" placeholder="filter by title">
+                        <input type="text" class="form-control" ng-model="search.libelle" placeholder="filter by Hôtel">
                     </div>
                     <div class="form-group">
                         <select class="form-control" ng-model="search.categorie.nombre_etoiles">
@@ -19,18 +17,21 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-class="{'active':order=='id'}"><a href="javascript:void(0)" ng-click=" order ='id' ">No
-                        Sort</a></li>
-                    <li ng-class="{'active':order=='categorie'}"><a href="javascript:void(0)"
-                                                                    ng-click=" order = 'title' ">Stars</a></li>
-                    <li ng-class="{'active':order=='ville'}"><a href="javascript:void(0)" ng-click=" order = 'body' ">By
-                        city</a></li>
+                    <li ng-class="{'active':order=='id'}">
+                        <a href="javascript:void(0)" ng-click=" order ='id' ">No Sort</a>
+                    </li>
+                    <li ng-class="{'active':order=='categorie'}">
+                        <a href="javascript:void(0)" ng-click=" order = 'categorie.libelle' ">Stars</a>
+                    </li>
+                    <li ng-class="{'active':order=='ville'}">
+                        <a href="javascript:void(0)" ng-click=" order = 'ville.libelle' ">By city</a>
+                    </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </nav>
     <div class="row">
-        <div class="col-md-12" ng-repeat="hotel  in hotels">
+        <div class="col-md-12" ng-repeat="hotel  in hotels| limitTo:50  | filter:search:strict | orderBy:order">
             <div class="thumbnail">
                 <div class="caption">
                     <div class="row">
@@ -42,7 +43,7 @@
                         <div class="col-md-3">
                             <p>{{hotel.ville.libelle }}</p>
                             <p>{{hotel.categorie.libelle }}</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Détails</a></p>
+                            <p><a href="#/hotel/{{hotel.id}}" class="btn btn-primary" role="button">Détails</a></p>
                         </div>
                     </div>
                 </div>

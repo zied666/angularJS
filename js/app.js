@@ -27,5 +27,6 @@ app.config(function ($routeProvider) {
         .when('/user/:id', {templateUrl: 'page/user.html', controller: 'UserController'})
         .when('/users', {templateUrl: 'page/users.html', controller: 'UsersController'})
         .when('/hotels', {templateUrl: 'page/hotels.html', controller: 'HotelsController'})
+        .when('/hotel/:id', {templateUrl: 'page/hotel.html', controller: 'HotelController'})
         .otherwise({redirectTo: '/'});
 });
