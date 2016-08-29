@@ -14,9 +14,6 @@ app.config(['$httpProvider', function($httpProvider) {
 }
 ]);
 
-/*app.run(function ($rootScope) {
-    $rootScope.currentUser=false;
-});*/
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {templateUrl: 'page/homepage.html', controller: 'HomePageController'})

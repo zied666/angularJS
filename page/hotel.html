@@ -10,10 +10,14 @@
                 <a href="javascript:void(0)" ng-click="tab=1" aria-controls="home" role="tab" data-toggle="tab">Description</a>
             </li>
             <li role="presentation">
-                <a href="javascript:void(0)" ng-click="tab=2" aria-controls="profile" role="tab" data-toggle="tab">Data</a>
+                <a href="javascript:void(0)" ng-click="tab=2" aria-controls="profile" role="tab"
+                   data-toggle="tab">Data</a>
             </li>
             <li role="presentation">
                 <a href="javascript:void(0)" ng-click="tab=3" aria-controls="messages" role="tab" data-toggle="tab">Gmaps</a>
+            </li>
+            <li role="presentation">
+                <a href="javascript:void(0)" ng-click="tab=4; loadSaisons();" aria-controls="messages" role="tab" data-toggle="tab">Seasons</a>
             </li>
         </ul>
     </div>
@@ -68,6 +72,50 @@
     <div class="row" ng-if="tab==3">
         <div class="col-md-12">
             <ng-maps longitude="hotel.longitude" latitude="hotel.latitude"></ng-maps>
+        </div>
+    </div>
+    <div class="row" ng-if="tab==4">
+        <div class="col-md-12" ng-if="!selectedSeason">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Contrat</th>
+                    <th>Name</th>
+                    <th>Kind</th>
+                    <th>Perides</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="loadingSaisons">
+                    <td colspan="5" style="text-align: center"><img src="lib/img/loader2.gif" alt=""></td>
+                </tr>
+                <tr ng-if="!loadingSaisons" ng-repeat="saison in saisons">
+                    <td>{{saison.id}}</td>
+                    <td> {{saison.contrat.libelle}}</td>
+                    <td> {{saison.libelle}}</td>
+                    <td>
+                        <span class="label label-default" ng-if="saison.type==1">Saison</span>
+                        <span class="label label-primary" ng-if="saison.type==2">Promotion</span>
+                        <span class="label label-success" ng-if="saison.type==3">Amicale</span>
+                        <span class="label label-warning" ng-if="saison.type==4">Contingent</span>
+                        <span class="label label-danger" ng-if="saison.type==5">EarlyBooking</span>
+                    </td>
+                    <td>
+                        <p ng-repeat="periode in saison.periodes"> {{periode.date_debut|date:"dd/MM/yyyy" }} -> {{periode.date_fin|date:"dd/MM/yyyy" }}</p>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" ng-click="changeSelectedSeason(saison.id)">
+                            <span  class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" ng-if="selectedSeason">
+                {{ selectedSeason.libelle }}
         </div>
     </div>
 </div>
