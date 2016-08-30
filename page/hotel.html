@@ -17,7 +17,8 @@
                 <a href="javascript:void(0)" ng-click="tab=3" aria-controls="messages" role="tab" data-toggle="tab">Gmaps</a>
             </li>
             <li role="presentation">
-                <a href="javascript:void(0)" ng-click="tab=4; loadSaisons();" aria-controls="messages" role="tab" data-toggle="tab">Seasons</a>
+                <a href="javascript:void(0)" ng-click="tab=4; loadSaisons();" aria-controls="messages" role="tab"
+                   data-toggle="tab">Seasons</a>
             </li>
         </ul>
     </div>
@@ -75,7 +76,7 @@
         </div>
     </div>
     <div class="row" ng-if="tab==4">
-        <div class="col-md-12" ng-if="!selectedSeason">
+        <div class="col-md-12 animated tab1" ng-if="!selectedSeason">
             <table class="table">
                 <thead>
                 <tr>
@@ -103,19 +104,60 @@
                         <span class="label label-danger" ng-if="saison.type==5">EarlyBooking</span>
                     </td>
                     <td>
-                        <p ng-repeat="periode in saison.periodes"> {{periode.date_debut|date:"dd/MM/yyyy" }} -> {{periode.date_fin|date:"dd/MM/yyyy" }}</p>
+                        <p ng-repeat="periode in saison.periodes"> {{periode.date_debut|date:"dd/MM/yyyy" }} ->
+                            {{periode.date_fin|date:"dd/MM/yyyy" }}</p>
                     </td>
                     <td>
                         <a href="javascript:void(0)" ng-click="changeSelectedSeason(saison.id)">
-                            <span  class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12" ng-if="selectedSeason">
-                {{ selectedSeason.libelle }}
+        <div class="col-md-12 animated tab3" ng-if="selectedSeason">
+            <button type="button" ng-click="cancelSelectedSeason()"><span class="glyphicon glyphicon-arrow-left"></span>
+                Return
+            </button>
+            <h2>{{ selectedSeason.libelle }}</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Hotel</dt>
+                        <dd>{{selectedSeason.hotel.libelle}} nights</dd>
+                        <dt>Convention</dt>
+                        <dd>{{selectedSeason.contrat.libelle}}</dd>
+                        <dt>Type</dt>
+                        <dd>
+                            <span ng-if="selectedSeason.type==1">Saison</span>
+                            <span ng-if="selectedSeason.type==2">Promotion</span>
+                            <span ng-if="selectedSeason.type==3">Amicale</span>
+                            <span ng-if="selectedSeason.type==4">Contingent</span>
+                            <span ng-if="selectedSeason.type==5">EarlyBooking</span>
+                        </dd>
+                        <dt>Min Stay</dt>
+                        <dd>{{selectedSeason.min_stay}} nights</dd>
+                        <dt>Period</dt>
+                        <dd ng-repeat="periode in selectedSeason.periodes"> {{periode.date_debut|date:"dd/MM/yyyy" }} -> {{periode.date_fin|date:"dd/MM/yyyy" }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-8">
+                    <dl class="dl-horizontal">
+                        <dt>Arr.Base</dt>
+                        <dd>{{selectedSeason._arr_base.libelle}}</dd>
+                        <dt>Base Price</dt>
+                        <dd>{{selectedSeason.prix_convention}} DT</dd>
+                        <dt>marge_vente</dt>
+                        <dd>{{selectedSeason.marge_vente}} {{selectedSeason.pourcentage|showSigne}}</dd>
+                        <dt>Arrangements</dt>
+                        <dd ng-repeat="arrangement in selectedSeason.arrangements" ng-if="arrangement.etat">
+                            <strong>{{arrangement.arrangement.libelle}}</strong> | Val : {{  arrangement.valeur }} {{arrangement.valeur_pour|showSigne}} | Marge : {{  arrangement.marge }} {{arrangement.marge_pour|showSigne}}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
         </div>
     </div>
 </div>

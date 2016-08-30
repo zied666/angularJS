@@ -10,3 +10,13 @@ app.filter('showStars',function () {
     };
 
 });
+app.filter('showSigne',function () {
+
+    return function (input) {
+        if(input)
+            return "%";
+        else
+            return 'TND';
+    };
+
+});

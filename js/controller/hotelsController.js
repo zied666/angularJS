@@ -41,4 +41,7 @@ app.controller('HotelController', function ($scope, $rootScope, HotelFactory, $r
                 $scope.selectedSeason = value;
         });
     }
+    $scope.cancelSelectedSeason = function (id) {
+        $scope.selectedSeason = false;
+    }
 });
