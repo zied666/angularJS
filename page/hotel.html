@@ -159,15 +159,17 @@
                             <dd>{{selectedSeason.prix_convention}} DT</dd>
                             <dt>marge_vente</dt>
                             <dd>{{selectedSeason.marge_vente}} {{selectedSeason.pourcentage|showSigne}}</dd>
-                            <hr>
+                            <hr ng-if="selectedSeason.chambres.length >0" />
                             <dt ng-if="selectedSeason.chambres.length >0">Occupation</dt>
                             <dd ng-repeat="chambre in selectedSeason.chambres">
                                 <span ng-bind-html="chambre.etat|etat "></span> <strong>{{chambre.chambre.libelle}} :</strong>  Adulte[{{chambre.min_adulte}}-{{chambre.max_adulte}}] & child [{{chambre.min_enfant}}-{{chambre.max_enfant}}] & Pax [{{chambre.min_pax}}-{{chambre.max_pax}}]
                             </dd>
+                            <hr ng-if="selectedSeason.arrangements.length >0" />
                             <dt ng-if="selectedSeason.arrangements.length >0">Arrangements</dt>
                             <dd ng-repeat="arrangement in selectedSeason.arrangements">
                                 <span ng-bind-html=" arrangement.etat|etat "></span> <strong>{{arrangement.arrangement.libelle}} :</strong>  Val : {{  arrangement.valeur }} {{arrangement.valeur_pour|showSigne}} | Marge : {{  arrangement.marge }} {{arrangement.marge_pour|showSigne}}
                             </dd>
+                            <hr  ng-if="selectedSeason.vues.length >0"/>
                             <dt ng-if="selectedSeason.vues.length >0">Vues</dt>
                             <dd ng-repeat="vue in selectedSeason.vues">
                                 <span ng-bind-html="vue.etat|etat "></span> <strong>{{vue.vue.libelle}}</strong> => Val : {{  vue.valeur }} {{vue.valeur_pour|showSigne}} | Marge : {{  vue.marge }} {{vue.marge_pour|showSigne}}
@@ -177,6 +179,12 @@
                             <dd> <strong>Single : </strong>  {{selectedSeason.saison_supp.supp_single}} {{selectedSeason.saison_supp.supp_single_pour|showSigne}}</dd>
                             <dd> <strong>Single Marge : </strong>  {{selectedSeason.saison_supp.sipp_single_marge}} {{selectedSeason.saison_supp.supp_single_marge_pour|showSigne}}</dd>
                             <dd> <strong>Single Child : </strong>  {{selectedSeason.saison_supp.supp_single_enfant}}</dd>
+
+                            <hr ng-if="selectedSeason.supp_chambres.length >0" />
+                            <dt ng-if="selectedSeason.supp_chambres.length >0">Supp rooms</dt>
+                            <dd ng-repeat="chambre in selectedSeason.supp_chambres">
+                                <span ng-bind-html="chambre.etat|etat "></span> <strong>{{chambre.chambre.libelle}}</strong> => Val : {{  chambre.valeur }} {{chambre.valeur_pour|showSigne}} | Marge : {{  chambre.marge }} {{chambre.marge_pour|showSigne}}
+                            </dd>
                             <hr>
                             <dt>1 enfant & 1 adult</dt>
                             <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val1_enfant1_adulte1}} {{selectedSeason.saison_reduc.pour1_enfant1_adulte|showSigne}}</dd>
