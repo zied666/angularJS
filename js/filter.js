@@ -20,3 +20,13 @@ app.filter('showSigne',function () {
     };
 
 });
+app.filter('etat',function () {
+
+    return function (input) {
+        if(input)
+            return "<span class='label label-success'>Active</span>";
+        else
+            return "<span class='label label-danger'>Inactive</span>";
+    };
+
+});

@@ -11,10 +11,10 @@
             </li>
             <li role="presentation">
                 <a href="javascript:void(0)" ng-click="tab=2" aria-controls="profile" role="tab"
-                   data-toggle="tab">Data</a>
+                   data-toggle="tab">Technical sheet</a>
             </li>
             <li role="presentation">
-                <a href="javascript:void(0)" ng-click="tab=3" aria-controls="messages" role="tab" data-toggle="tab">Gmaps</a>
+                <a href="javascript:void(0)" ng-click="tab=3" aria-controls="messages" role="tab" data-toggle="tab">Geolocation</a>
             </li>
             <li role="presentation">
                 <a href="javascript:void(0)" ng-click="tab=4; loadSaisons();" aria-controls="messages" role="tab"
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="row" ng-if="tab==4">
-        <div class="col-md-12 animated tab1" ng-if="!selectedSeason">
+        <div class="col-md-12 animated tab1">
             <table class="table">
                 <thead>
                 <tr>
@@ -108,7 +108,7 @@
                             {{periode.date_fin|date:"dd/MM/yyyy" }}</p>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" ng-click="changeSelectedSeason(saison.id)">
+                        <a href="javascript:void(0)" ng-click="changeSelectedSeason(saison.id)" data-toggle="modal" data-target="#myModal">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </a>
                     </td>
@@ -116,47 +116,94 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12 animated tab3" ng-if="selectedSeason">
-            <button type="button" ng-click="cancelSelectedSeason()"><span class="glyphicon glyphicon-arrow-left"></span>
-                Return
-            </button>
-            <h2>{{ selectedSeason.libelle }}</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <dl class="dl-horizontal">
-                        <dt>Hotel</dt>
-                        <dd>{{selectedSeason.hotel.libelle}} nights</dd>
-                        <dt>Convention</dt>
-                        <dd>{{selectedSeason.contrat.libelle}}</dd>
-                        <dt>Type</dt>
-                        <dd>
-                            <span ng-if="selectedSeason.type==1">Saison</span>
-                            <span ng-if="selectedSeason.type==2">Promotion</span>
-                            <span ng-if="selectedSeason.type==3">Amicale</span>
-                            <span ng-if="selectedSeason.type==4">Contingent</span>
-                            <span ng-if="selectedSeason.type==5">EarlyBooking</span>
-                        </dd>
-                        <dt>Min Stay</dt>
-                        <dd>{{selectedSeason.min_stay}} nights</dd>
-                        <dt>Period</dt>
-                        <dd ng-repeat="periode in selectedSeason.periodes"> {{periode.date_debut|date:"dd/MM/yyyy" }} -> {{periode.date_fin|date:"dd/MM/yyyy" }}</dd>
-                    </dl>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-if="selectedSeason">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ selectedSeason.libelle }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <dl class="dl-horizontal">
+                            <dt>Hotel</dt>
+                            <dd>{{selectedSeason.hotel.libelle}}</dd>
+                            <dt>Convention</dt>
+                            <dd>{{selectedSeason.contrat.libelle}}</dd>
+                            <dt ng-if="selectedSeason.agences.length >0">Agences</dt>
+                            <dd ng-repeat="agence in selectedSeason.agences">
+                                {{ agence }}
+                            </dd>
+                            <dt>Type</dt>
+                            <dd>
+                                <span class="label label-default" ng-if="selectedSeason.type==1">Saison</span>
+                                <span class="label label-primary" ng-if="selectedSeason.type==2">Promotion</span>
+                                <span class="label label-success" ng-if="selectedSeason.type==3">Amicale</span>
+                                <span class="label label-warning" ng-if="selectedSeason.type==4">Contingent</span>
+                                <span class="label label-danger" ng-if="selectedSeason.type==5">EarlyBooking</span>
+                            </dd>
+                            <dt>Min Stay</dt>
+                            <dd>{{selectedSeason.min_stay}} nights</dd>
+                            <dt>Period</dt>
+                            <dd ng-repeat="periode in selectedSeason.periodes"> {{periode.date_debut|date:"dd/MM/yyyy" }} -> {{periode.date_fin|date:"dd/MM/yyyy" }}</dd>
+                            <dt>Ages</dt>
+                            <dd><strong>Enfant 1 :</strong> [{{selectedSeason.min1_age_enfant}}..{{selectedSeason.max1_age_enfant}}]</dd>
+                            <dd><strong>Enfant 2 :</strong> [{{selectedSeason.min2_age_enfant}}..{{selectedSeason.max2_age_enfant}}]</dd>
+                            <hr>
+                            <dt>Arr.Base</dt>
+                            <dd>{{selectedSeason._arr_base.libelle}}</dd>
+                            <dt>Base Price</dt>
+                            <dd>{{selectedSeason.prix_convention}} DT</dd>
+                            <dt>marge_vente</dt>
+                            <dd>{{selectedSeason.marge_vente}} {{selectedSeason.pourcentage|showSigne}}</dd>
+                            <hr>
+                            <dt ng-if="selectedSeason.chambres.length >0">Occupation</dt>
+                            <dd ng-repeat="chambre in selectedSeason.chambres">
+                                <span ng-bind-html="chambre.etat|etat "></span> <strong>{{chambre.chambre.libelle}} :</strong>  Adulte[{{chambre.min_adulte}}-{{chambre.max_adulte}}] & child [{{chambre.min_enfant}}-{{chambre.max_enfant}}] & Pax [{{chambre.min_pax}}-{{chambre.max_pax}}]
+                            </dd>
+                            <dt ng-if="selectedSeason.arrangements.length >0">Arrangements</dt>
+                            <dd ng-repeat="arrangement in selectedSeason.arrangements">
+                                <span ng-bind-html=" arrangement.etat|etat "></span> <strong>{{arrangement.arrangement.libelle}} :</strong>  Val : {{  arrangement.valeur }} {{arrangement.valeur_pour|showSigne}} | Marge : {{  arrangement.marge }} {{arrangement.marge_pour|showSigne}}
+                            </dd>
+                            <dt ng-if="selectedSeason.vues.length >0">Vues</dt>
+                            <dd ng-repeat="vue in selectedSeason.vues">
+                                <span ng-bind-html="vue.etat|etat "></span> <strong>{{vue.vue.libelle}}</strong> => Val : {{  vue.valeur }} {{vue.valeur_pour|showSigne}} | Marge : {{  vue.marge }} {{vue.marge_pour|showSigne}}
+                            </dd>
+                            <hr>
+                            <dt>Supp</dt>
+                            <dd> <strong>Single : </strong>  {{selectedSeason.saison_supp.supp_single}} {{selectedSeason.saison_supp.supp_single_pour|showSigne}}</dd>
+                            <dd> <strong>Single Marge : </strong>  {{selectedSeason.saison_supp.sipp_single_marge}} {{selectedSeason.saison_supp.supp_single_marge_pour|showSigne}}</dd>
+                            <dd> <strong>Single Child : </strong>  {{selectedSeason.saison_supp.supp_single_enfant}}</dd>
+                            <hr>
+                            <dt>1 enfant & 1 adult</dt>
+                            <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val1_enfant1_adulte1}} {{selectedSeason.saison_reduc.pour1_enfant1_adulte|showSigne}}</dd>
+                            <dd><strong>Age 2 :</strong> - {{selectedSeason.saison_reduc.val1_enfant1_adulte2}} {{selectedSeason.saison_reduc.pour1_enfant1_adulte|showSigne}}</dd>
+                            <dt>1 enfant  & 2 adult</dt>
+                            <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val1_enfant2_adulte1}} {{selectedSeason.saison_reduc.pour1_enfant2_adulte|showSigne}}</dd>
+                            <dd><strong>Age 2 :</strong> - {{selectedSeason.saison_reduc.val1_enfant2_adulte2}} {{selectedSeason.saison_reduc.pour1_enfant2_adulte|showSigne}}</dd>
+                            <dt>1 enfant separed</dt>
+                            <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val1_enfant_separe1}} {{selectedSeason.saison_reduc.pour1_enfant_separe|showSigne}}</dd>
+                            <dd><strong>Age 2 :</strong> - {{selectedSeason.saison_reduc.val1_enfant_separe2}} {{selectedSeason.saison_reduc.pour1_enfant_separe|showSigne}}</dd>
+
+                            <dt>2> enfant & 1 adult</dt>
+                            <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val2_enfant1_adulte1}} {{selectedSeason.saison_reduc.pour2_enfant1_adulte|showSigne}}</dd>
+                            <dd><strong>Age 2 :</strong> - {{selectedSeason.saison_reduc.val2_enfant1_adulte2}} {{selectedSeason.saison_reduc.pour1_enfant1_adulte|showSigne}}</dd>
+                            <dt>2> enfant  & 2 adult</dt>
+                            <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val2_enfant2_adulte1}} {{selectedSeason.saison_reduc.pour2_enfant2_adulte|showSigne}}</dd>
+                            <dd><strong>Age 2 :</strong> - {{selectedSeason.saison_reduc.val2_enfant2_adulte2}} {{selectedSeason.saison_reduc.pour2_enfant2_adulte|showSigne}}</dd>
+                            <dt>2> enfant separed</dt>
+                            <dd><strong>Age 1 :</strong> - {{selectedSeason.saison_reduc.val2_enfant_ou_plus_separe1}} {{selectedSeason.saison_reduc.pour2_enfant_ou_plus_separe|showSigne}}</dd>
+                            <dd><strong>Age 2 :</strong> - {{selectedSeason.saison_reduc.val2_enfant_ou_plus_separe2}} {{selectedSeason.saison_reduc.pour2_enfant_ou_plus_separe|showSigne}}</dd>
+
+                        </dl>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <dl class="dl-horizontal">
-                        <dt>Arr.Base</dt>
-                        <dd>{{selectedSeason._arr_base.libelle}}</dd>
-                        <dt>Base Price</dt>
-                        <dd>{{selectedSeason.prix_convention}} DT</dd>
-                        <dt>marge_vente</dt>
-                        <dd>{{selectedSeason.marge_vente}} {{selectedSeason.pourcentage|showSigne}}</dd>
-                        <dt>Arrangements</dt>
-                        <dd ng-repeat="arrangement in selectedSeason.arrangements" ng-if="arrangement.etat">
-                            <strong>{{arrangement.arrangement.libelle}}</strong> | Val : {{  arrangement.valeur }} {{arrangement.valeur_pour|showSigne}} | Marge : {{  arrangement.marge }} {{arrangement.marge_pour|showSigne}}
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-4"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
