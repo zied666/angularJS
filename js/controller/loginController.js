@@ -1,9 +1,9 @@
-app.controller('LoginController', function ($scope, $rootScope, $cookieStore, UserFactory, $window,$timeout, $route) {
+app.controller('LoginController', function ($scope, $rootScope, localStorageService, UserFactory, $window,$timeout, $route) {
 
     if ($rootScope.currentUser != false)
         $window.location.href = '#/profile';
 
-    console.log($rootScope.currentUser);
+    //console.log($rootScope.currentUser);
     $scope.success = false;
     $scope.error = false;
 
@@ -11,7 +11,9 @@ app.controller('LoginController', function ($scope, $rootScope, $cookieStore, Us
         $scope.loadingForm = true;
         UserFactory.login($scope.email, $scope.password).then(function (response) {
             if (response != false) {
-                $cookieStore.put('currentUser', response);
+                //$cookieStore.put('currentUser', response);
+                localStorageService.set("currentUser","ddddddddddd");
+                //localStorageService.get()("currentUser");
                 $rootScope.currentUser = response;
                 $scope.success = true;
                 $scope.error = false;
@@ -28,34 +30,42 @@ app.controller('LoginController', function ($scope, $rootScope, $cookieStore, Us
     };
 
 });
-app.controller('LoginNavController', function ($scope, $rootScope, $cookieStore, $window, UserFactory) {
+app.controller('LoginNavController', function ($scope, $rootScope, localStorageService, $window, UserFactory) {
 
-    if ($cookieStore.get('currentUser') == undefined)
-        $cookieStore.put('currentUser', false);
-    $rootScope.currentUser = $cookieStore.get('currentUser');
+    if(!localStorageService.hasOwnProperty("currentUser"))
+        localStorageService.set("currentUser",false);
+    //if ($cookieStore.get('currentUser') == undefined)
+    //    $cookieStore.put('currentUser', false);
+    //$rootScope.currentUser = $cookieStore.get('currentUser');
+    $rootScope.currentUser = localStorageService.get("currentUser");
     //$scope.currentUser = $rootScope.currentUser;
     $scope.logout = function () {
-        $cookieStore.put('currentUser', false);
+        //$cookieStore.put('currentUser', false);
+        localStorageService.set("currentUser",false);
         $rootScope.currentUser = false;
         $window.location.href = '#/';
     }
 
 });
 
-app.controller('ProfileController', function ($scope, $rootScope, $cookieStore, $window, $timeout, UserFactory) {
+app.controller('ProfileController', function ($scope, $rootScope, localStorageService, $window, $timeout, UserFactory) {
+
+    console.log(localStorageService.get("currentUser"));
+
 
     if ($rootScope.currentUser == false)
         $window.location.href = '#/login';
 
     $scope.success = false;
-    $scope.user = $cookieStore.get('currentUser');
+    $scope.user = localStorageService.get("currentUser");
 
 
     $scope.submit = function () {
         $scope.loadingForm = true;
         $timeout(function () {
-            $cookieStore.put('currentUser', $scope.user);
-            $rootScope.currentUser = $cookieStore.get('currentUser');
+            localStorageService.set("currentUser",$scope.user);
+            //$cookieStore.put('currentUser', $scope.user);
+            $rootScope.currentUser = localStorageService.get("currentUser");
             $scope.loadingForm = false;
             $scope.success = true;
         }, 1000);

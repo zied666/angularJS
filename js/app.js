@@ -1,9 +1,17 @@
-var app = angular.module('monApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate','ngMessages','ngSanitize']);
+var app = angular.module('monApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate','ngMessages','ngSanitize','LocalStorageModule']);
 app.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$viewContentLoaded', function () {
         $templateCache.removeAll();
     });
 });
+
+app.config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+        .setPrefix('myApp')
+        .setStorageType('localStorage')
+        .setNotify(true, true)
+});
+
 app.run(['$templateCache', function ($templateCache) {
     $templateCache.removeAll();
 }]);
