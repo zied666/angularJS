@@ -8,7 +8,7 @@ app.run(function ($rootScope, $templateCache) {
 app.config(function (localStorageServiceProvider) {
     localStorageServiceProvider
         .setPrefix('myApp')
-        .setStorageType('localStorage')
+        .setStorageType('sessionStorage')
         .setNotify(true, true)
 });
 

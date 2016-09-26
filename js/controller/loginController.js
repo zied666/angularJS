@@ -12,7 +12,7 @@ app.controller('LoginController', function ($scope, $rootScope, localStorageServ
         UserFactory.login($scope.email, $scope.password).then(function (response) {
             if (response != false) {
                 //$cookieStore.put('currentUser', response);
-                localStorageService.set("currentUser","ddddddddddd");
+                localStorageService.set("currentUser",response);
                 //localStorageService.get()("currentUser");
                 $rootScope.currentUser = response;
                 $scope.success = true;
@@ -50,7 +50,7 @@ app.controller('LoginNavController', function ($scope, $rootScope, localStorageS
 
 app.controller('ProfileController', function ($scope, $rootScope, localStorageService, $window, $timeout, UserFactory) {
 
-    console.log(localStorageService.get("currentUser"));
+
 
 
     if ($rootScope.currentUser == false)
