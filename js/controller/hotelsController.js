@@ -3,9 +3,8 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
     limit = 5;
     offset=0;
     $scope.moreHotelsLoading=false;
+    $rootScope.loading = true;
 
-
-    $rootScope.loading = false;
     $scope.hotels = {};
     HotelFactory.all(limit,offset).then(function (hotels) {
         $scope.hotels = hotels;
