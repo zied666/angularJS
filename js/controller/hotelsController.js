@@ -1,13 +1,29 @@
 app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
 
-    $rootScope.loading = true;
+    limit = 5;
+    offset=0;
+    $scope.moreHotelsLoading=false;
+
+
+    $rootScope.loading = false;
     $scope.hotels = {};
-    HotelFactory.all().then(function (hotels) {
+    HotelFactory.all(limit,offset).then(function (hotels) {
         $scope.hotels = hotels;
         $rootScope.loading = false;
     }, function (msg) {
         alert(msg);
     });
+
+    $scope.loadMorePost=function () {
+        offset+=limit;
+        $scope.moreHotelsLoading=true;
+        HotelFactory.all(limit,offset).then(function (hotels) {
+            $scope.hotels = $scope.hotels.concat(hotels);
+            $scope.moreHotelsLoading=false;
+        }, function (msg) {
+            alert(msg);
+        });
+    }
 
 });
 app.controller('HotelController', function ($scope, $rootScope, HotelFactory, $routeParams) {

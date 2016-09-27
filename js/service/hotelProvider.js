@@ -2,27 +2,26 @@ app.factory('HotelFactory', function ($http, $q, $timeout, $resource) {
 
     var factory = {
         hotels: false,
-        all: function () {
+        all: function (limit, offset) {
             var deferred = $q.defer();
-            if (factory.hotels == false) {
-                Post = $resource('http://os-travel.com/api/hotels', {}, {
-                    'query': {
-                        method: 'GET',
-                        isArray: true
-                    }
-                });
-                factory.hotels = Post.query(function () {
-                    deferred.resolve(factory.hotels);
-                });
-            }
-            else
+            Post = $resource('http://localhost/ostravel/web/api/hotels?limit=:limit&offset=:offset', {
+                limit: limit,
+                offset: offset
+            }, {
+                'query': {
+                    method: 'GET',
+                    isArray: true
+                }
+            });
+            factory.hotels = Post.query(function () {
                 deferred.resolve(factory.hotels);
+            });
             return deferred.promise;
         },
         get: function (id) {
             var deferred = $q.defer();
             hotel = {};
-            Post = $resource('http://os-travel.com/api/hotels/:id', {id: id}, {
+            Post = $resource('http://localhost/ostravel/web/api/hotels/:id', {id: id}, {
                 'query': {
                     method: 'GET',
                     isArray: false
@@ -36,7 +35,7 @@ app.factory('HotelFactory', function ($http, $q, $timeout, $resource) {
         getSaisons: function (id) {
             var deferred = $q.defer();
             saisons = [];
-            Post = $resource('http://os-travel.com/api/hotels/:id/saisons', {id: id}, {
+            Post = $resource('http://localhost/ostravel/web/api/hotels/:id/saisons', {id: id}, {
                 'query': {
                     method: 'GET',
                     isArray: true

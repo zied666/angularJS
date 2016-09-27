@@ -1,5 +1,5 @@
 <div ng-if="!loading" class="container">
-    <nav class="navbar navbar-default">
+    <!--<nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
@@ -29,9 +29,9 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>-->
     <div class="row">
-        <div class="col-md-12" ng-repeat="hotel  in hotels| limitTo:50  | filter:search:strict | orderBy:order">
+        <div class="col-md-12" ng-repeat="hotel  in hotels">
             <div class="thumbnail">
                 <div class="caption">
                     <div class="row">
@@ -48,6 +48,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-12">
+            <button ng-if="!moreHotelsLoading" type="button" ng-click="loadMorePost()" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
+                Load more Hotels
+            </button>
+            <button ng-if="moreHotelsLoading" type="button" disabled class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
+                Loading ...
+            </button>
         </div>
     </div>
 </div>
