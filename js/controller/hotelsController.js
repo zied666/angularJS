@@ -17,6 +17,7 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
 
 
     $scope.update = function () {
+        offset=0;
         $scope.updateHotels = true;
         HotelFactory.filtre(limit, offset,$scope.search ).then(function (hotels) {
             $scope.hotels = hotels;
