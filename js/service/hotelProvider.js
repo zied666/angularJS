@@ -2,11 +2,14 @@ app.factory('HotelFactory', function ($http, $q, $timeout, $resource) {
 
     var factory = {
         hotels: false,
-        all: function (limit, offset) {
+        filtre: function (limit, offset, search) {
             var deferred = $q.defer();
-            Post = $resource('http://os-travel.com/api/hotels?limit=:limit&offset=:offset', {
+            Post = $resource('http://os-travel.com/api/hotels', {
                 limit: limit,
-                offset: offset
+                offset: offset,
+                search: search.name,
+                orderBy: search.orderBy,
+                order: search.order
             }, {
                 'query': {
                     method: 'GET',

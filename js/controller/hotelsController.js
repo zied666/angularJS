@@ -1,24 +1,49 @@
 app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
 
     limit = 5;
-    offset=0;
-    $scope.moreHotelsLoading=false;
+    offset = 0;
+    $scope.search = {name:"",order:"ASC",orderBy:"libelle"};
+    $scope.updateHotels = false;
+    $scope.moreHotelsLoading = false;
     $rootScope.loading = true;
 
     $scope.hotels = {};
-    HotelFactory.all(limit,offset).then(function (hotels) {
+    HotelFactory.filtre(limit, offset,$scope.search ).then(function (hotels) {
         $scope.hotels = hotels;
         $rootScope.loading = false;
     }, function (msg) {
         alert(msg);
     });
 
-    $scope.loadMorePost=function () {
-        offset+=limit;
-        $scope.moreHotelsLoading=true;
-        HotelFactory.all(limit,offset).then(function (hotels) {
+
+    $scope.update = function () {
+        $scope.updateHotels = true;
+        HotelFactory.filtre(limit, offset,$scope.search ).then(function (hotels) {
+            $scope.hotels = hotels;
+            $scope.updateHotels = false;
+        }, function (msg) {
+            alert(msg);
+        });
+    };
+
+    $scope.updateSort = function (lib) {
+        if(lib==$scope.search.orderBy)
+        {
+            if($scope.search.order == "DESC")
+                $scope.search.order="ASC";
+            else
+                $scope.search.order="DESC";
+        }
+        else
+            $scope.search.orderBy=lib;
+    };
+
+    $scope.loadMorePost = function () {
+        offset += limit;
+        $scope.moreHotelsLoading = true;
+        HotelFactory.filtre(limit, offset,$scope.search ).then(function (hotels) {
             $scope.hotels = $scope.hotels.concat(hotels);
-            $scope.moreHotelsLoading=false;
+            $scope.moreHotelsLoading = false;
         }, function (msg) {
             alert(msg);
         });

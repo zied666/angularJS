@@ -1,36 +1,35 @@
 <div ng-if="!loading" class="container">
-    <!--<nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" ng-model="search.libelle" placeholder="filter by Hôtel">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" ng-model="search.categorie.nombre_etoiles">
-                            <option value="">ALL</option>
-                            <option value="2">2 stars</option>
-                            <option value="3">3 stars</option>
-                            <option value="4">4 stars</option>
-                            <option value="5">5 stars</option>
-                        </select>
+                        <input type="text" class="form-control" ng-model="search.name"  ng-change="update();"
+                               placeholder="Search">
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-class="{'active':order=='id'}">
-                        <a href="javascript:void(0)" ng-click=" order ='id' ">No Sort</a>
+                    <li ng-class="{'active':search.orderBy=='libelle'}">
+                        <a href="javascript:void(0)" ng-click=" updateSort('libelle'); update();">Alpha</a>
                     </li>
-                    <li ng-class="{'active':order=='categorie'}">
-                        <a href="javascript:void(0)" ng-click=" order = 'categorie.libelle' ">Stars</a>
+                    <li ng-class="{'active':search.orderBy=='categorie'}">
+                        <a href="javascript:void(0)" ng-click=" updateSort('categorie'); update();">Stars</a>
                     </li>
-                    <li ng-class="{'active':order=='ville'}">
-                        <a href="javascript:void(0)" ng-click=" order = 'ville.libelle' ">By city</a>
+                    <li ng-class="{'active':search.orderBy=='ville'}">
+                        <a href="javascript:void(0)" ng-click=" updateSort('ville');update();">By city</a>
+                    </li>
+                    <li>
+                        <a><span ng-if="search.order=='DESC'">&uarr;</span><span ng-if="search.order=='ASC'">&darr;</span></a>
                     </li>
                 </ul>
+
             </div>
         </div>
-    </nav>-->
-    <div class="row">
+    </nav>
+    <div class="row" ng-if="updateHotels">
+        loading ...
+    </div>
+    <div class="row" ng-if="!updateHotels">
         <div class="col-md-12" ng-repeat="hotel  in hotels">
             <div class="thumbnail">
                 <div class="caption">
@@ -50,10 +49,12 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button ng-if="!moreHotelsLoading" type="button" ng-click="loadMorePost()" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
+            <button ng-if="!moreHotelsLoading" type="button" ng-click="loadMorePost()"
+                    class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
                 Load more Hotels
             </button>
-            <button ng-if="moreHotelsLoading" type="button" disabled class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
+            <button ng-if="moreHotelsLoading" type="button" disabled class="btn btn-primary btn-lg btn-block"
+                    style="margin-bottom: 100px;">
                 Loading ...
             </button>
         </div>
