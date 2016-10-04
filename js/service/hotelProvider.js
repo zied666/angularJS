@@ -9,7 +9,9 @@ app.factory('HotelFactory', function ($http, $q, $timeout, $resource) {
                 offset: offset,
                 search: search.name,
                 orderBy: search.orderBy,
-                order: search.order
+                order: search.order,
+                ville: search.ville,
+                etoile: search.etoiles
             }, {
                 'query': {
                     method: 'GET',

@@ -4,19 +4,27 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" ng-model="search.name"  ng-change="update();"
-                               placeholder="Search">
+                        <input type="text" class="form-control" ng-model="search.name"  ng-change="update();" placeholder="Search">
+                        <input type="text" class="form-control" ng-model="search.ville"  ng-change="update();" placeholder="City">
+                        <select class="form-control" ng-model="search.etoiles"  ng-change="update();">
+                            <option value="">Number of stars</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="1">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-class="{'active':search.orderBy=='libelle'}">
-                        <a href="javascript:void(0)" ng-click=" updateSort('libelle'); update();">Alpha</a>
+                        <a href="javascript:void(0)" ng-click=" updateSort('libelle'); update();">Names</a>
                     </li>
                     <li ng-class="{'active':search.orderBy=='categorie'}">
                         <a href="javascript:void(0)" ng-click=" updateSort('categorie'); update();">Stars</a>
                     </li>
                     <li ng-class="{'active':search.orderBy=='ville'}">
-                        <a href="javascript:void(0)" ng-click=" updateSort('ville');update();">By city</a>
+                        <a href="javascript:void(0)" ng-click=" updateSort('ville');update();">Cities</a>
                     </li>
                     <li>
                         <a><span ng-if="search.order=='DESC'">&uarr;</span><span ng-if="search.order=='ASC'">&darr;</span></a>
