@@ -18,17 +18,27 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-class="{'active':search.orderBy=='libelle'}">
-                        <a href="javascript:void(0)" ng-click=" updateSort('libelle'); update();">Names</a>
+                        <a href="javascript:void(0)" ng-click=" updateSort('libelle'); update();">
+                            Names
+                            <span ng-if="search.order=='DESC' && search.orderBy=='libelle'">&uarr;</span>
+                            <span ng-if="search.order=='ASC' && search.orderBy=='libelle'">&darr;</span>
+                        </a>
                     </li>
                     <li ng-class="{'active':search.orderBy=='categorie'}">
-                        <a href="javascript:void(0)" ng-click=" updateSort('categorie'); update();">Stars</a>
+                        <a href="javascript:void(0)" ng-click=" updateSort('categorie'); update();">
+                            Stars
+                            <span ng-if="search.order=='DESC' && search.orderBy=='categorie'">&uarr;</span>
+                            <span ng-if="search.order=='ASC' && search.orderBy=='categorie'">&darr;</span>
+                        </a>
                     </li>
                     <li ng-class="{'active':search.orderBy=='ville'}">
-                        <a href="javascript:void(0)" ng-click=" updateSort('ville');update();">Cities</a>
+                        <a href="javascript:void(0)" ng-click=" updateSort('ville');update();">
+                            Cities
+                            <span ng-if="search.order=='DESC' && search.orderBy=='ville'">&uarr;</span>
+                            <span ng-if="search.order=='ASC' && search.orderBy=='ville'">&darr;</span>
+                        </a>
                     </li>
                     <li>
-                        <a><span ng-if="search.order=='DESC'">&uarr;</span><span ng-if="search.order=='ASC'">&darr;</span></a>
-                    </li>
                 </ul>
 
             </div>
