@@ -45,11 +45,13 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
     };
 
     $scope.loadMorePost = function () {
-        console.log(offset);
-        offset += limit;
         $scope.moreHotelsLoading = true;
         HotelFactory.filtre(limit, offset, $scope.search).then(function (hotels) {
-            $scope.hotels = $scope.hotels.concat(hotels);
+            if(hotels.length>0)
+            {
+                $scope.hotels = $scope.hotels.concat(hotels);
+                offset += limit;
+            }
             $scope.moreHotelsLoading = false;
         }, function (msg) {
             alert(msg);
