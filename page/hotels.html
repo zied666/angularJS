@@ -38,33 +38,40 @@
         <center><img src="lib/img/loader2.gif" alt=""></center>
     </div>
     <div class="row" ng-if="!updateHotels">
-        <div class="col-md-12" ng-repeat="hotel  in hotels">
-            <div class="thumbnail">
-                <div class="caption">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h4>{{hotel.libelle}}</h4>
-                            <div ng-bind-html="hotel.description_courte"></div>
-                            <span ng-repeat="tag in hotel.tags"> #{{tag.libelle}} </span>
-                        </div>
-                        <div class="col-md-3">
-                            <p>{{hotel.ville.libelle }}</p>
-                            <p>{{hotel.categorie.libelle }}</p>
-                            <p><a href="#/hotel/{{hotel.id}}" class="btn btn-primary" role="button">Détails</a></p>
+        <div class="row" ng-if="hotels.length ==0">
+            <div class="alert alert-warning" role="alert">
+                <a href="#" class="alert-link">No hotels available</a>
+            </div>
+        </div>
+        <div class="row" ng-if="hotels.length != 0">
+            <div class="col-md-12" ng-repeat="hotel  in hotels">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4>{{hotel.libelle}}</h4>
+                                <div ng-bind-html="hotel.description_courte"></div>
+                                <span ng-repeat="tag in hotel.tags"> #{{tag.libelle}} </span>
+                            </div>
+                            <div class="col-md-3">
+                                <p>{{hotel.ville.libelle }}</p>
+                                <p>{{hotel.categorie.libelle }}</p>
+                                <p><a href="#/hotel/{{hotel.id}}" class="btn btn-primary" role="button">Détails</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <button ng-if="!moreHotelsLoading" type="button" ng-click="loadMorePost()"
-                    class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
-                Load more Hotels
-            </button>
-            <button ng-if="moreHotelsLoading" type="button" disabled class="btn btn-primary btn-lg btn-block"
-                    style="margin-bottom: 100px;">
-                Loading ...
-            </button>
+            <div class="col-md-12">
+                <button ng-if="!moreHotelsLoading" type="button" ng-click="loadMorePost()"
+                        class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
+                    Load more Hotels
+                </button>
+                <button ng-if="moreHotelsLoading" type="button" disabled class="btn btn-primary btn-lg btn-block"
+                        style="margin-bottom: 100px;">
+                    Loading ...
+                </button>
+            </div>
         </div>
     </div>
 </div>
