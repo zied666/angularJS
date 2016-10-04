@@ -73,14 +73,8 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <button ng-if="!moreHotelsLoading" type="button" ng-click="loadMorePost()"
-                        class="btn btn-primary btn-lg btn-block" style="margin-bottom: 100px;">
-                    Load more Hotels
-                </button>
-                <button ng-if="moreHotelsLoading" type="button" disabled class="btn btn-primary btn-lg btn-block"
-                        style="margin-bottom: 100px;">
-                    Loading ...
-                </button>
+                <div infinite-scroll="loadMorePost()" infinite-scroll-distance="1" infinite-scroll-disabled='moreHotelsLoading'></div>
+                <div style="margin-bottom: 100px;">><center><img src="lib/img/loader2.gif" alt=""></center></div>
             </div>
         </div>
     </div>

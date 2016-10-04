@@ -1,6 +1,6 @@
 app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
 
-    limit = 5;
+    limit = 10;
     offset = 0;
     $scope.search = {
         name: "",
@@ -45,6 +45,7 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
     };
 
     $scope.loadMorePost = function () {
+        console.log(offset);
         offset += limit;
         $scope.moreHotelsLoading = true;
         HotelFactory.filtre(limit, offset, $scope.search).then(function (hotels) {

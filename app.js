@@ -1,4 +1,5 @@
-var app = angular.module('monApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate','ngMessages','ngSanitize','LocalStorageModule']);
+var app = angular.module('monApp', ['ngRoute', 'ngResource','ngCookies','ngAnimate','ngMessages','ngSanitize','LocalStorageModule','infinite-scroll']);
+angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
 app.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$viewContentLoaded', function () {
         $templateCache.removeAll();
