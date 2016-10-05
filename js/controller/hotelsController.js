@@ -1,7 +1,7 @@
 app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
 
     limit = 10;
-    offset = 0;
+    offset = 10;
     $scope.search = {
         name: "",
         order: "ASC",
@@ -13,8 +13,8 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
     $scope.moreHotelsLoading = false;
     $rootScope.loading = true;
 
-    $scope.hotels = {};
-    HotelFactory.filtre(limit, offset, $scope.search).then(function (hotels) {
+    $scope.hotels = [];
+    HotelFactory.filtre(limit, 0, $scope.search).then(function (hotels) {
         $scope.hotels = hotels;
         $rootScope.loading = false;
     }, function (msg) {
@@ -23,11 +23,11 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
 
 
     $scope.update = function () {
-        offset = 0;
         $scope.updateHotels = true;
-        HotelFactory.filtre(limit, offset, $scope.search).then(function (hotels) {
+        HotelFactory.filtre(limit, 0, $scope.search).then(function (hotels) {
             $scope.hotels = hotels;
             $scope.updateHotels = false;
+            offset = 10;
         }, function (msg) {
             alert(msg);
         });
