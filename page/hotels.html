@@ -4,6 +4,15 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
+                        <input type="date" class="form-control" ng-model="search.checkIn"  ng-change="update();" placeholder="Check in">
+                        <select class="form-control" ng-model="search.nuitees"  ng-change="update();">
+                            <option value="">Nights</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="1">4</option>
+                            <option value="5">5</option>
+                        </select>
                         <input type="text" class="form-control" ng-model="search.name"  ng-change="update();" placeholder="Search">
                         <input type="text" class="form-control" ng-model="search.ville"  ng-change="update();" placeholder="City">
                         <select class="form-control" ng-model="search.etoiles"  ng-change="update();">
@@ -54,19 +63,19 @@
             </div>
         </div>
         <div class="row" ng-if="hotels.length != 0">
-            <div class="col-md-12" ng-repeat="hotel  in hotels">
+            <div class="col-md-12 animated posts" ng-repeat="hotel  in hotels">
                 <div class="thumbnail">
                     <div class="caption">
                         <div class="row">
                             <div class="col-md-9">
-                                <h4>{{hotel.libelle}}</h4>
-                                <div ng-bind-html="hotel.description_courte"></div>
-                                <span ng-repeat="tag in hotel.tags"> #{{tag.libelle}} </span>
+                                <h4>{{hotel.details.libelle}} <small>({{hotel.saison}})</small></h4>
+                                <div ng-bind-html="hotel.details.description_courte"></div>
+                                <span ng-repeat="tag in hotel.details.tags"> #{{tag.libelle}} </span>
                             </div>
                             <div class="col-md-3">
-                                <p>{{hotel.ville.libelle }}</p>
-                                <p>{{hotel.categorie.libelle }}</p>
-                                <p><a href="#/hotel/{{hotel.id}}" class="btn btn-primary" role="button">Détails</a></p>
+                                <p>{{hotel.details.ville.libelle }}</p>
+                                <p>{{hotel.details.categorie.libelle }}</p>
+                                <p><a href="#/hotel/{{hotel.details.id}}" class="btn btn-primary" role="button">Détails</a></p>
                             </div>
                         </div>
                     </div>

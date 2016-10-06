@@ -1,22 +1,23 @@
-app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
+app.controller('HotelsController', function ($scope, HotelFactory) {
 
     limit = 10;
     offset = 10;
     $scope.search = {
+        checkIn: "2016-12-06",
+        nuitees: "1",
         name: "",
         order: "ASC",
         orderBy: "libelle",
         ville: null,
         etoiles: null
     };
-    $scope.updateHotels = false;
+    $scope.updateHotels = true;
     $scope.moreHotelsLoading = false;
-    $rootScope.loading = true;
 
     $scope.hotels = [];
     HotelFactory.filtre(limit, 0, $scope.search).then(function (hotels) {
         $scope.hotels = hotels;
-        $rootScope.loading = false;
+        $scope.updateHotels = false;
     }, function (msg) {
         alert(msg);
     });
@@ -47,8 +48,7 @@ app.controller('HotelsController', function ($scope, $rootScope, HotelFactory) {
     $scope.loadMorePost = function () {
         $scope.moreHotelsLoading = true;
         HotelFactory.filtre(limit, offset, $scope.search).then(function (hotels) {
-            if(hotels.length>0)
-            {
+            if (hotels.length > 0) {
                 $scope.hotels = $scope.hotels.concat(hotels);
                 offset += limit;
             }

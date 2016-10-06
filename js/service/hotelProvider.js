@@ -7,6 +7,8 @@ app.factory('HotelFactory', function ($http, $q, $timeout, $resource) {
             Post = $resource('http://os-travel.com/api/hotels', {
                 limit: limit,
                 offset: offset,
+                checkIn: search.checkIn,
+                nuitees: search.nuitees,
                 search: search.name,
                 orderBy: search.orderBy,
                 order: search.order,
