@@ -3,7 +3,7 @@ app.controller('HotelsController', function ($scope, HotelFactory) {
     limit = 10;
     offset = 10;
     $scope.search = {
-        checkIn: "2016-12-06",
+        checkIn: new Date(),
         nuitees: "1",
         name: "",
         order: "ASC",
